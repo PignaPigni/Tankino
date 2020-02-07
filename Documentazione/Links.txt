@@ -1,0 +1,30 @@
+
+ESEMPIO DI TELAIO:
+https://www.amazon.com/POLOLU-ROBOTICS-ELECTRONICS-CHASSIS-MOTORS/dp/B00DKYQ174/ref=sr_1_2?keywords=tank+chassis+no+motor&qid=1581087742&sr=8-2
+
+https://www.amazon.com/s?k=tank+chassis+no+motor&ref=nb_sb_noss
+
+
+NEMA - Pololu:
+https://www.pololu.com/category/87/stepper-motors
+
+
+NEMA 8 YT:
+https://www.youtube.com/watch?v=i67KHlWYxyI
+
+
+Drive a Stepper Motor with L298N | Arduino Tutorial:
+https://www.youtube.com/watch?v=CE9G9uoYApI
+
+KEYES L298N:
+https://www.youtube.com/watch?v=ZdVkMaZqKXs
+
+Stepper Motors with Arduino - Controlling Bipolar & Unipolar stepper motors:
+https://www.youtube.com/watch?v=0qwrnUeSpYQ
+
+KEYES L298:
+https://www.google.com/search?q=keyes+l298&rlz=1C1CHFX_enCH870CH870&oq=keyes+l298&aqs=chrome..69i57j69i59l3.3729j0j7&sourceid=chrome&ie=UTF-8
+
+
+
+

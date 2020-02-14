@@ -27,4 +27,12 @@ https://www.google.com/search?q=keyes+l298&rlz=1C1CHFX_enCH870CH870&oq=keyes+l29
 
 
 
+TO BUY:
+L298N (13.99): https://www.amazon.it/Electrely-Bridge-Stepper-Controller-Arduino/dp/B07GFGS6BN/ref=sr_1_2?__mk_it_IT=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=l298n&qid=1581668766&sr=8-2
+
+Aukey PowerBank 10'000mah (15.99): https://www.amazon.it/AUKEY-Powerbank-10000mAh-Caricabatterie-Portatile/dp/B01NBRGY7N/ref=sr_1_5?__mk_it_IT=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2YVK3J16MJJQZ&keywords=aukey+powerbank+10000mah&qid=1581669307&smid=A3EV04UBDYHSQS&sprefix=aukey+powe%2Caps%2C212&sr=8-5
+
+2x NEMA 8 Pololu (18): https://www.pololu.com/product/1204
+
+
 

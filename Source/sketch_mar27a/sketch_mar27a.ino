@@ -19,7 +19,6 @@ void loop() {
    //Serial.println("clockwise");
    int i = 50;
    while(true){
-    
      myStepper.step(1); 
      myStepper.setSpeed(i);
      if(i <= 1200){

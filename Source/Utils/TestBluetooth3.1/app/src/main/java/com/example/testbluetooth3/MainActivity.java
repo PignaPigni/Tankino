@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * L'adattatore bluetooth che si connetterà al Tankino.
      */
-    private BluetoothAdapter BA;
+    //private BluetoothAdapter BA;
     /**
      * Set dei device bluetooth associati con il telefono
      */
@@ -34,15 +34,15 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Lo stream di output verso il tankino.
      */
-    private OutputStream os;
+    //private OutputStream os;
     /**
      * Il socket bluetooth con cui il telefono e il tankino comunicano tra loro.
      */
-    private BluetoothSocket bss = null;
+    //private BluetoothSocket bss = null;
     /**
      * Il nome identificativo del Tankino nei dispositivi bluetooth.
      */
-    private String name = "Tankino";
+    //private String name = "Tankino";
     /**
      * Lo slider di sinistra che invia i dati al tankino per il cingolo sinistro.
      */
@@ -52,48 +52,55 @@ public class MainActivity extends AppCompatActivity {
      */
     private SeekBar seekBarRight;
 
+    /**
+     * Il thread che gestisce il passaggio di dati
+     */
+    private CrawlerThread crawlerThread;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BA = BluetoothAdapter.getDefaultAdapter();
+        //BA = BluetoothAdapter.getDefaultAdapter();
         seekBarLeft = (SeekBar) findViewById(R.id.seekBarLeft);
         seekBarRight = (SeekBar) findViewById(R.id.seekBarRight);
+        crawlerThread = new CrawlerThread(seekBarLeft, seekBarRight);
     }
 
     public void connect(View v){
-        for (BluetoothDevice bd:BA.getBondedDevices()){
-            if(bd.getName().equalsIgnoreCase(name)){
-                System.out.println(bd.getName());
-                ParcelUuid[] p = bd.getUuids();
-                UUID uuid = p[0].getUuid();
-                uuid = UUID.fromString(p[0].toString());
-                for(int i = 0; i < p.length; i++){
-                    System.out.println(p.length + "ParcelUids: " + p[i].toString() + " UUID: " + uuid.toString());
-                }
+        this.crawlerThread.start();
+    }
 
-                try{
-                    bd = BA.getRemoteDevice(bd.getAddress().toString());
-                    bss = bd.createInsecureRfcommSocketToServiceRecord(uuid);
-                    bss.connect();
-                    os = bss.getOutputStream();
-                    sendValue((byte)0b0000011);
-                    os.close();
-                    bss.close();
-                }catch(IOException ioe){
-                    System.out.println("IOE: " + ioe.getMessage());
+/*
+    public void connect(View v){
+        if(!bss.isConnected()){
+            for (BluetoothDevice bd:BA.getBondedDevices()){
+                if(bd.getName().equalsIgnoreCase(name)){
+                    System.out.println(bd.getName());
+                    ParcelUuid[] p = bd.getUuids();
+                    UUID uuid = UUID.fromString(p[0].toString());
+                    try{
+                        bd = BA.getRemoteDevice(bd.getAddress().toString());
+                        bss = bd.createInsecureRfcommSocketToServiceRecord(uuid);
+                        bss.connect();
+                        os = bss.getOutputStream();
+                    }catch(IOException ioe){
+                        System.out.println("IOE: " + ioe.getMessage());
+                    }
+                    break;
+                }else{
+                    System.out.println("Non corrisponde a Tankino");
                 }
-                break;
-            }else{
-                System.out.println("Non corrisponde a Tankino");
             }
+        }else{
+            System.out.println("Sei già collegato");
         }
     }
 
     public void sendValue(byte value){
         try{
             //Istanzia l'outputstrem
-            
+
             os.write(value);
             os.flush();
             System.out.println("Invio del messaggio completato...");
@@ -103,56 +110,10 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Errore 02: Tankino non connesso o non trovato");
         }
 
-    }
-
-    public void getLeftCrowlerSpeed(View view){
-        seekBarLeft.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                System.out.println(progress);
-                sendValue((byte)progress);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                CrawlerThread t = new CrawlerThread();
-
-            }
-
-            public void sendLastValuesThread(SeekBar seekBar ){
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+    }*/
 
 
-        });
-
-    }
-
-    public void getRightCrowlerSpeed(View view){
-        seekBarLeft.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                System.out.println(progress);
-                sendValue((byte)progress);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                System.out.println(seekBar.getProgress());
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                System.out.println(seekBar.getProgress());
-            }
-        });
-    }
-
+/*
     public void leftCrowlerForward(View view) {
         System.out.println(0b11111111);
         sendValue((byte) 0b11111111);
@@ -170,13 +131,10 @@ public class MainActivity extends AppCompatActivity {
         sendValue((byte) 0b10000000);
     }
 
-    /**
-     * Muove il cingolo di destra a massima potenza all'indietro (-100%)
-     * @param view La vista
-     */
+
     public void rightCrowlerBackward(View view) {
         System.out.println(0b00000000);
         sendValue((byte) 0b0111111);
-    }
+    }*/
 
 }

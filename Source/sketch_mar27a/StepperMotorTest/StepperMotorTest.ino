@@ -11,18 +11,23 @@ void setup() {
    // set the speed at 60 rpm:
    myStepper.setSpeed(50);
    // initialize the serial port:
+   digitalWrite(4, 0);
+   digitalWrite(5, 1);
    Serial.begin(9600);
 }
 
 void loop() {
    // step one revolution in one direction:
    //Serial.println("clockwise");
+   int data = Serial.read();
    int i = 50;
    while(true){
      myStepper.step(1); 
      myStepper.setSpeed(i);
      if(i <= 1200){
-      i++;   
+      i++;
+     }else{
+      i--;
      }
    }
    //delay(100);

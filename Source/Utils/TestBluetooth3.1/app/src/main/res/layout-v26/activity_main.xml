@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:transitionGroup="true"
     tools:context="com.example.testbluetooth3.MainActivity">
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,30 +18,50 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
-        <SeekBar
+        <!--<SeekBar
             android:id="@+id/seekBarLeft"
             android:layout_width="83dp"
             android:layout_height="231dp"
-            android:focusableInTouchMode="true"
-
-            android:max="0"
-            android:min="127"
-            android:onClick="getLeftCrowlerSpeed"
+            android:max="127"
+            android:min="0"
             android:progress="63"
             android:rotation="90" />
 
         <SeekBar
             android:id="@+id/seekBarRight"
             android:layout_width="83dp"
-            android:layout_height="231dp"
+            android:layout_height="500dp"
             android:max="255"
             android:min="128"
-            android:onClick="getRightCrowlerSpeed"
             android:progress="192"
             android:rotation="90" />
 
+        <SeekBar
+            android:id="@+id/seekBarLeft"
+            android:layout_width="86dp"
+            android:layout_height="500dp"
+            android:max="127"
+            android:min="0"
+            android:progress="63"
+            android:rotation="90" />-->
+
+        <SeekBar
+            android:id="@+id/seekBarLeft"
+            android:layout_width="193dp"
+            android:layout_height="386dp"
+            android:max="127"
+            android:min="0"
+            android:progress="63"
+            android:rotation="90"/>
+        <SeekBar
+            android:id="@+id/seekBarRight"
+            android:layout_width="193dp"
+            android:layout_height="386dp"
+            android:max="255"
+            android:min="128"
+            android:progress="192"
+            android:rotation="90"/>
 
     </LinearLayout>
-
 
 </RelativeLayout>

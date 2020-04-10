@@ -64,30 +64,49 @@ public class MainActivity extends AppCompatActivity {
     public void connect(View v){
         for (BluetoothDevice bd:BA.getBondedDevices()){
             if(bd.getName().equalsIgnoreCase(name)){
-                try{
-                    ParcelUuid[] p = new ParcelUuid[0];
-                    p = bd.getUuids();
-                    UUID uuid;
-                    for (ParcelUuid uuids:  p) {
+                System.out.println(bd.getName());
+                    ParcelUuid[] p = bd.getUuids();
+                    UUID uuid = p[0].getUuid();
+                    uuid = UUID.fromString(p[0].toString());
+                    for(int i = 0; i < p.length; i++){
+                        System.out.println(p.length + "ParcelUids: " + p[i].toString() + " UUID: " + uuid.toString());
+                    }
+                    try{
+                        //bss = bd.createRfcommSocketToServiceRecord(uuid);
+                        bss = bd.createInsecureRfcommSocketToServiceRecord(uuid);
+                        System.out.println("isConnected:" + bss.isConnected());
+                        System.out.println("Create Socket" + bss.toString());
+                        System.out.println("sksk" + bss.getRemoteDevice());
+                        bss.connect();
+                        System.out.println("Connect" + bd.getAddress());
+                        os = bss.getOutputStream();
+                        System.out.println("OutputStream");
+                    }catch(IOException ioe){
+                        System.out.println("IOE: " + ioe.getMessage());
+                    }
+                    break;
+
+
+                    /*for (ParcelUuid uuids:  p) {
                         uuid = uuids.getUuid();
                         bss = bd.createRfcommSocketToServiceRecord(uuid);
                         System.out.println("L'applicazione sta tentando di connettersi");
-                        bss.connect();
+                        try{
+                            bss.connect();
+                        }catch(IOException ioe){
+                            System.out.println("First IOE KVHGFKGJKFJGKFJGFJKFKHFGJFFF");
 
+                        }
+                        System.out.println("BSS: " + bss.toString());
                         if (bss.isConnected()) {
                             System.out.println("Connected to device " + bss.getRemoteDevice().getName());
                             break;
                         }
-                        break;
                     }
                     os = bss.getOutputStream();
-                }catch(IOException ioe){
-
-                }catch(NullPointerException npe){
-                    System.out.println("Sei una merda");
-                }
+                    break; */
             }else{
-                System.out.println("not found");
+                System.out.println("Non corrisponde a Tankino");
             }
         }
     }

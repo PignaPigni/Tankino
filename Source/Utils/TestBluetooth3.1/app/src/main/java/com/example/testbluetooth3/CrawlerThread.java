@@ -47,9 +47,9 @@ public class CrawlerThread extends Thread {
         this.connect();
         try{
             while(!this.isInterrupted()){
-                System.out.println("left" + left.getProgress());
+                System.out.println("left" + (byte)left.getProgress());
                 System.out.println("right" + right.getProgress());
-
+                sendValue((byte)left.getProgress());
                 Thread.sleep(2000);
             }
         }catch (InterruptedException ie){
@@ -98,7 +98,7 @@ public class CrawlerThread extends Thread {
 
             os.write(value);
             os.flush();
-            System.out.println("Invio del messaggio completato...");
+            System.out.println("Invio del messaggio completato..." + value);
         }catch (IOException ioe){
             System.out.println("Errore 01: Invio del messaggio fallito");
         }catch(NullPointerException npe){

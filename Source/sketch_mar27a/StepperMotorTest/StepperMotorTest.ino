@@ -20,11 +20,12 @@ void loop() {
    // step one revolution in one direction:
    //Serial.println("clockwise");
    int data = Serial.read();
+   Serial.println(data);
    int i = 50;
    while(true){
      myStepper.step(1); 
      myStepper.setSpeed(i);
-     if(i <= 1200){
+     if(i <= data*10){
       i++;
      }else{
       i--;

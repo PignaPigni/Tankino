@@ -47,8 +47,8 @@ public class CrawlerThread extends Thread {
         this.connect();
         try{
             while(!this.isInterrupted()){
-                System.out.println("left" + (byte)left.getProgress());
-                System.out.println("right" + right.getProgress());
+                System.out.println("LEFT: " + (byte)left.getProgress());
+                //System.out.println("right" + right.getProgress());
                 sendValue((byte)left.getProgress());
                 Thread.sleep(2000);
             }
@@ -62,16 +62,25 @@ public class CrawlerThread extends Thread {
         //if(!bss.isConnected()){
             for (BluetoothDevice bd:BA.getBondedDevices()){
                 if(bd.getName().equalsIgnoreCase(name)){
+                    bd = BA.getRemoteDevice("00:14:03:05:F3:0F");
                     System.out.println(bd.getName());
                     ParcelUuid[] p = bd.getUuids();
                     UUID uuid = UUID.fromString(p[0].toString());
                     try{
-                        bd = BA.getRemoteDevice(bd.getAddress().toString());
+                        //bd = BA.getRemoteDevice(bd.getAddress().toString());
+                        System.out.println("BD: " + bd.getAddress().toString());
                         bss = bd.createInsecureRfcommSocketToServiceRecord(uuid);
+                        System.out.println("BSS CREATE...");
                         bss.connect();
-                        os = bss.getOutputStream();
-                        this.sendValue((byte)0b11111111);
+                        System.out.println("BSS CONNECT");
+                        //os = bss.getOutputStream();
+                        System.out.println("OS GETOUTPUTSTREAM");
+                        /*bss.close();
+                        os.close();*/
+                        this.start();
+
                     }catch(IOException ioe){
+
                         System.out.println("IOE: " + ioe.getMessage());
                     }
                     break;
@@ -102,7 +111,7 @@ public class CrawlerThread extends Thread {
         }catch (IOException ioe){
             System.out.println("Errore 01: Invio del messaggio fallito");
         }catch(NullPointerException npe){
-            System.out.println("Errore 02: Tankino non connesso o non trovato");
+            System.out.println("Errore 02: Tankino non connesso o non trovato" + npe.getMessage());
         }
 
     }

@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void connect(View v){
-        this.crawlerThread.start();
+        this.crawlerThread.connect();
     }
 
 /*

@@ -19,17 +19,32 @@ void setup() {
 void loop() {
    // step one revolution in one direction:
    //Serial.println("clockwise");
-   int data = Serial.read();
-   Serial.println(data);
+   
+   
    int i = 50;
+   int data = 50;
+   /*while(true){
+    if(Serial.available()){
+         data = Serial.read();
+     Serial.println(data);
+    }
+     delay(2000);      
+   }*/
    while(true){
+    if(Serial.available()){
+         data = Serial.read();
+          //Serial.println("DATA: " + data);
+         //Serial.println("I: " + i);
+    }
      myStepper.step(1); 
-     myStepper.setSpeed(i);
-     if(i <= data*10){
+
+     if(i <= data*10+100){
       i++;
      }else{
       i--;
-     }
+     }     
+
+     myStepper.setSpeed(i);
    }
    //delay(100);
 }

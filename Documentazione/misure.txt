@@ -1,0 +1,5 @@
+PowerBank: 11,6 x 7,3 x 1,6 cm
+
+Arduino Mega 2560: 10,1 x 5,3 cm
+
+L98N controller: 2,4 x 2,1 cm

@@ -8,11 +8,7 @@ const int stepsPerRevolution = 200;
 Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
 
 void setup() {
-   // set the speed at 60 rpm:
-   myStepper.setSpeed(50);
    // initialize the serial port:
-   digitalWrite(4, 0);
-   digitalWrite(5, 1);
    Serial.begin(9600);
 }
 
@@ -22,29 +18,38 @@ void loop() {
    
    
    int i = 50;
-   int data = 50;
-   /*while(true){
-    if(Serial.available()){
-         data = Serial.read();
-     Serial.println(data);
-    }
-     delay(2000);      
-   }*/
+   int data = 0;
    while(true){
     if(Serial.available()){
-         data = Serial.read();
           //Serial.println("DATA: " + data);
+         data = Serial.read();
+         Serial.print("DATA: ");
+         Serial.println(data);
          //Serial.println("I: " + i);
     }
+    Serial.print("DATA: ");
+    
      myStepper.step(1); 
 
      if(i <= data*10+100){
+      i++;
+     }else{
+       i = data;
+     }
+
+     myStepper.setSpeed(i);
+   }
+   /*
+   while(true){
+     myStepper.step(1); 
+
+     if(i <= 1000){
       i++;
      }else{
       i--;
      }     
 
      myStepper.setSpeed(i);
-   }
-   //delay(100);
+   }*/
+   
 }

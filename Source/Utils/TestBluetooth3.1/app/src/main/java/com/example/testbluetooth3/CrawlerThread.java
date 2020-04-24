@@ -50,7 +50,7 @@ public class CrawlerThread extends Thread {
                 System.out.println("LEFT: " + (byte)left.getProgress());
                 //System.out.println("right" + right.getProgress());
                 sendValue((byte)left.getProgress());
-                Thread.sleep(2000);
+                Thread.sleep(100);
             }
         }catch (InterruptedException ie){
 
@@ -73,7 +73,7 @@ public class CrawlerThread extends Thread {
                         System.out.println("BSS CREATE...");
                         bss.connect();
                         System.out.println("BSS CONNECT");
-                        //os = bss.getOutputStream();
+                        os = bss.getOutputStream();
                         System.out.println("OS GETOUTPUTSTREAM");
                         /*bss.close();
                         os.close();*/

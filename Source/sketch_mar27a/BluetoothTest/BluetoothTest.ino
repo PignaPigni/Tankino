@@ -1,23 +1,41 @@
+#include <Stepper.h>
+const int stepsPerRevolution = 200;
+// change this to fit the number of steps per revolution
+// for your motor
+// initialize the stepper library on pins 8 through 11:
+Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
 
-int data;
-int led1 = 11;
+int data = 63;
 
 void setup() {
-pinMode(led1, OUTPUT);
 Serial.begin(9600);
 }
 
 void loop() {
-  if(Serial.available()){
-    int data = Serial.read();
-    Serial.println(data);
-    if(data == 49){
-      digitalWrite(led1, 1);
-      Serial.println("LED ON");
-    }else if(data == 50){
-      digitalWrite(led1, 0);
-      Serial.println("LED ON");
+  int i = 1;
+  while(true){
+    if(Serial.available()){
+      data = Serial.read();
+      Serial.println(data);
+
     }
-    delay(100);
+    if(i < data*8){
+      i++;
+    }else{
+      i--;
+    }
+
+
+    /*
+    if(data > 0){
+      if(i <= data*10+100){
+        i++; 
+      }else{
+        i--;
+      }
+      Serial.println(data);
+    }*/
+    myStepper.step(1);
+    myStepper.setSpeed(i);
   }
 }

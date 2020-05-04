@@ -47,9 +47,10 @@ public class CrawlerThread extends Thread {
         this.connect();
         try{
             while(!this.isInterrupted()){
-                System.out.println("LEFT: " + (byte)left.getProgress());
+                //System.out.println("LEFT: " + (byte)left.getProgress());
                 //System.out.println("right" + right.getProgress());
                 sendValue((byte)left.getProgress());
+                sendValue((byte)right.getProgress());
                 Thread.sleep(100);
             }
         }catch (InterruptedException ie){

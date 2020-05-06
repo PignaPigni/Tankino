@@ -34,14 +34,14 @@ void setup() {
 
 void leftStepperLoop(){
   //while(true){
-     leftStepper.step(1);
+     leftStepper.step(2);
      
   //}
 }
 
 void rightStepperLoop(){
   //while(true){   
-     rightStepper.step(1);
+     rightStepper.step(-2);
   //}
 }
 

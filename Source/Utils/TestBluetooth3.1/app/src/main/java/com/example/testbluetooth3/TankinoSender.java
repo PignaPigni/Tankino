@@ -35,6 +35,10 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Deprecato
+ * @author Michele Tomyslak, Nicholas Pigni
+ */
 public class TankinoSender extends Activity  {
     Button b1,b2,b3,b4;
     private BluetoothAdapter BA;

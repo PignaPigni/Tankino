@@ -21,6 +21,10 @@ import java.io.OutputStream;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * deprecato
+ * @author Michle Tomyslak
+ */
 public class MainActivity extends AppCompatActivity {
 
     /**

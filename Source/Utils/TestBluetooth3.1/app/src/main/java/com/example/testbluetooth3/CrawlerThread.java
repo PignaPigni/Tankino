@@ -13,9 +13,27 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.UUID;
 
+
+/**
+ * Il thread che gestisce l'invio dei dati e la connessione dal dispositivo android al tankino
+ *
+ * @author Michele Tomyslak , Nicholas Pigni
+ */
 public class CrawlerThread extends Thread {
     //private byte leftLastValue llv;
+
+
+    /**
+     * Lo slider di sinistra che controlla il cingolo sinistro del Tankino.
+     * min: 0
+     * max:127
+     */
     private SeekBar left;
+    /**
+     * Lo slider di destra che controlla il cingolo destro del Tankino.
+     * min:128
+     * max:255
+     */
     private SeekBar right;
     /**
      * L'adattatore bluetooth che si connetterà al Tankino.
@@ -37,12 +55,22 @@ public class CrawlerThread extends Thread {
      */
     private String name = "Tankino";
 
+
+    /**
+     * Costruttore del gestore dei cingoli con i due slider(SeekBar) che controllano entrambi i motori del tankino.
+     * @param left Lo slider di sinistra che controlla il cingolo sinistro del tankino.
+     * @param right Lo slider di destra che controlla il cingolo destro del tankino.
+     */
     public CrawlerThread(SeekBar left, SeekBar right){
         BA = BluetoothAdapter.getDefaultAdapter();
         this.left = left;
         this.right = right;
     }
 
+    /**
+     * Metodo loop della thread di CrawlerThread, in cui prima si connette.
+     * Finchè non è interrotto dalla disconnessione del Tankino continuerà a mandare i dati degli slider
+     */
     public void run(){
         this.connect();
         try{
@@ -59,6 +87,9 @@ public class CrawlerThread extends Thread {
 
     }
 
+    /**
+     * Metodo per la connessione del dispositivo android al Tankino
+     */
     public void connect(){
         //if(!bss.isConnected()){
             for (BluetoothDevice bd:BA.getBondedDevices()){
@@ -94,17 +125,14 @@ public class CrawlerThread extends Thread {
         }*/
     }
 
-    public void crowlerLeft(int percentage){
 
-    }
-
-    public void crowlerRight(int percentage){
-
-    }
-
+    /**
+     * Metodo che invia un dato all'outputstream su cui è connesso il tankino con il dispositivo mobile.
+     * @param value Il valore da mandare al tankino.
+     */
     public void sendValue(byte value){
         try{
-            //Istanzia l'outputstrem
+            //Istanzia l'outputstream
 
             os.write(value);
             os.flush();

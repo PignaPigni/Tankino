@@ -1,14 +1,11 @@
-
 #include <Thread.h>
 #include <ThreadController.h>
 
 #include <Stepper.h>
 
 
-const int stepsPerRevolution = 200;
-// change this to fit the number of steps per revolution
-// for your motor
-// initialize the stepper library on pins 8 through 11:
+const int stepsPerRevolution = 400;
+
 //Stepper myStepper(stepsPerRevolution, 52, 50, 48, 46);
 
 Stepper leftStepper(stepsPerRevolution, 52, 50, 48, 46);
@@ -34,14 +31,14 @@ void setup() {
 
 void leftStepperLoop(){
   //while(true){
-     leftStepper.step(2);
+     leftStepper.step(1);
      
   //}
 }
 
 void rightStepperLoop(){
   //while(true){   
-     rightStepper.step(-2);
+     rightStepper.step(-1);
   //}
 }
 
@@ -81,10 +78,10 @@ void loop() {
 
     /*int ritardo = 10-(double)(i)/(double)(1018)*(double)(100);
     Serial.println(ritardo);*/
-    leftStepperThread.setInterval(10-(double)(leftStepperSpeed)/(double)(1018)*(double)(100)/10+1);
+    leftStepperThread.setInterval(10-(double)(leftStepperSpeed)/(double)(1018)*(double)(100)/10);
     leftStepper.setSpeed(leftStepperSpeed);
     //leftStepperThread.setInterval(10-(double)(leftStepperSpeed)/(double)(1018)*(double)(100)/10);
-    rightStepperThread.setInterval(10-(double)(rightStepperSpeed)/(double)(1018)*(double)(100)/10+1);
+    rightStepperThread.setInterval(10-(double)(rightStepperSpeed)/(double)(1018)*(double)(100)/10);
     rightStepper.setSpeed(rightStepperSpeed);
     
 }

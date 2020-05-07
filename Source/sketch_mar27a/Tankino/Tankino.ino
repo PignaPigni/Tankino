@@ -4,9 +4,8 @@ const int stepsPerRevolution = 200;
 // for your motor
 // initialize the stepper library on pins 8 through 11:
 //Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
-/*
   Stepper leftStepper(stepsPerRevolution, 52, 50, 48, 46);
-  Stepper rightStepper(stepsPerRevolution, 34, 32, 30, 28);*/
+  Stepper rightStepper(stepsPerRevolution, 34, 32, 30, 28);
 
 int data = 63;
 
@@ -14,32 +13,30 @@ void setup() {
 Serial.begin(9600);
 }
 
-void loop(int speed) {
+void loop() {
 
   int leftSpeed = 10;
   int rightSpeed = 0;
-
+  int i = 0;
   
-  /*while(true){
+  while(true){
     if(Serial.available()){
       data = Serial.read();
-
-
     }
-    if(leftSpeed <= data*8+1){
-      leftSpeed++;
+    if(i <= data*8+1){
+      i++;
     }else{
-      leftSpeed--;
+      i--;
     }
 
     leftStepper.step(1);
-    leftStepper.setSpeed(leftSpeed);
+    leftStepper.setSpeed(i);
     
-    rightStepper.step(1);
+    rightStepper.step(-1);
     //setRightSpeed(rightSpeed);
-    //rightStepper.setSpeed(100);
+    rightStepper.setSpeed(i);
     
-  }*/
+  }
 }
 /*
 void setRightSpeed(int vel){

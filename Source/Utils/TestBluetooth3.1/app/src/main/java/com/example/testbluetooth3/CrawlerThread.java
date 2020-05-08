@@ -4,10 +4,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.os.ParcelUuid;
-import android.view.View;
 import android.widget.SeekBar;
-
-import androidx.annotation.MainThread;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -20,9 +17,6 @@ import java.util.UUID;
  * @author Michele Tomyslak , Nicholas Pigni
  */
 public class CrawlerThread extends Thread {
-    //private byte leftLastValue llv;
-
-
     /**
      * Lo slider di sinistra che controlla il cingolo sinistro del Tankino.
      * min: 0
@@ -75,54 +69,43 @@ public class CrawlerThread extends Thread {
         this.connect();
         try{
             while(!this.isInterrupted()){
-                //System.out.println("LEFT: " + (byte)left.getProgress());
-                //System.out.println("right" + right.getProgress());
                 sendValue((byte)left.getProgress());
                 sendValue((byte)right.getProgress());
                 Thread.sleep(100);
             }
         }catch (InterruptedException ie){
-
+            System.out.println("Interruzione: " + ie.getMessage());
         }
-
     }
 
     /**
      * Metodo per la connessione del dispositivo android al Tankino
      */
     public void connect(){
-        //if(!bss.isConnected()){
-            for (BluetoothDevice bd:BA.getBondedDevices()){
-                if(bd.getName().equalsIgnoreCase(name)){
-                    bd = BA.getRemoteDevice("00:14:03:05:F3:0F");
-                    System.out.println(bd.getName());
-                    ParcelUuid[] p = bd.getUuids();
-                    UUID uuid = UUID.fromString(p[0].toString());
-                    try{
-                        //bd = BA.getRemoteDevice(bd.getAddress().toString());
-                        System.out.println("BD: " + bd.getAddress().toString());
-                        bss = bd.createInsecureRfcommSocketToServiceRecord(uuid);
-                        System.out.println("BSS CREATE...");
-                        bss.connect();
-                        System.out.println("BSS CONNECT");
-                        os = bss.getOutputStream();
-                        System.out.println("OS GETOUTPUTSTREAM");
-                        /*bss.close();
-                        os.close();*/
-                        this.start();
-
-                    }catch(IOException ioe){
-
-                        System.out.println("IOE: " + ioe.getMessage());
-                    }
-                    break;
-                }else{
-                    System.out.println("Non corrisponde a Tankino");
+        for (BluetoothDevice bd:BA.getBondedDevices()){
+            if(bd.getName().equalsIgnoreCase(name)){
+                bd = BA.getRemoteDevice("00:14:03:05:F3:0F");
+                System.out.println(bd.getName());
+                ParcelUuid[] p = bd.getUuids();
+                UUID uuid = UUID.fromString(p[0].toString());
+                try{
+                    //bd = BA.getRemoteDevice(bd.getAddress().toString());
+                    System.out.println("BD: " + bd.getAddress().toString());
+                    bss = bd.createInsecureRfcommSocketToServiceRecord(uuid);
+                    System.out.println("BSS CREATE ...");
+                    bss.connect();
+                    System.out.println("BSS CONNECT");
+                    os = bss.getOutputStream();
+                    System.out.println("OS GETOUTPUTSTREAM");
+                    this.start();
+                }catch(IOException ioe){
+                    System.out.println("IOE: " + ioe.getMessage());
                 }
+                break;
+            }else{
+                System.out.println("Non corrisponde a Tankino");
             }
-        /*}else{
-            System.out.println("Sei già collegato");
-        }*/
+        }
     }
 
 
@@ -132,8 +115,6 @@ public class CrawlerThread extends Thread {
      */
     public void sendValue(byte value){
         try{
-            //Istanzia l'outputstream
-
             os.write(value);
             os.flush();
             System.out.println("Invio del messaggio completato..." + value);
@@ -142,6 +123,5 @@ public class CrawlerThread extends Thread {
         }catch(NullPointerException npe){
             System.out.println("Errore 02: Tankino non connesso o non trovato" + npe.getMessage());
         }
-
     }
 }

@@ -1,10 +1,10 @@
-package com.example.testbluetooth3;
+package com.example.TankinoController;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
-import com.example.testbluetooth3.myapplication.R;
+import com.example.TankinoController.myapplication.R;
 
 /**
  * deprecato

@@ -1,4 +1,4 @@
-package com.example.testbluetooth3;
+package com.example.TankinoController;
 
 import org.junit.Test;
 

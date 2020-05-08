@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:transitionGroup="true"
 
-    tools:context="com.example.testbluetooth3.MainActivity">
+    tools:context="com.example.TankinoController.MainActivity">
     <!--android:background="@color/colorBello"-->
 
     <Button
